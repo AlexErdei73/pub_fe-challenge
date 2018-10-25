@@ -1,9 +1,10 @@
 ### Set up
 
+(Tested with Node v10.10)
+
 ```
 npm install
 npm start
-open http://localhost:3000
 ```
 
 ### Task
@@ -23,3 +24,4 @@ Some things to note:
 * Simplicity is key.
 * Remember to make use of the app states provided.
 * There's no need to make requests to load data, keep it static.
+* You can use this file to list any improvements you didn't have time to implement.
