@@ -26,6 +26,6 @@ Some things to note:
 * The root of the sections tree has id -1.
 * Simplicity is key.
 * Remember to make use of the app states provided.
-* There's no need to make requests to load data, keep it static. 
-* You can use this file to list any improvements you didn't have time to implement. 
+* There's no need to make requests to load data, keep it static.
+* You can use this file to list any improvements you didn't have time to implement.
  
