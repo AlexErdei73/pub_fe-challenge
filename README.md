@@ -11,15 +11,15 @@ npm start
 
 To test your programming skill, we'd like you to have a go at a small task.
 
-We have provided you with four JSON files (in /data). These files provide you with a table of contents (sections.json), questions (/[\d]+(,[\d]+)+/.json), and a list of view states (states.json). Your task is to use this data to produce a content view page.
+We have provided you with four JSON files (in /data). 
+These files provide you with a table of contents (sections.json), questions (/[\d]+(,[\d]+)+/.json), and a list of view states (states.json).
+Your task is to use this data to produce a content view page.
 
 You should start with loading data from all four files.
 The view should display sections and questions altogether and the content tree hierarchy should be easy to read. 
+The starting state should have all questions collapsed and the UI should include a button allowing to cycle through the view states list.
 All questions should remain collapsed unless their tocId is on the expanded list.
 A user is not permitted to expand a question unless it's tocId is on the expanded list.
-
-The starting state should have all questions collapsed and the UI should include a button allowing to cycle through the view states list.
-
 
 Some things to note:
 * Your solution should work in any modern browser, but you don't need to worry about making it fully cross browser or supporting older browsers.
