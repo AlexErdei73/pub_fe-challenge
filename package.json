@@ -2,7 +2,7 @@
   "name": "esv-frontend-coding-test",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack serve --mode=development"
   },
   "author": "ESV",
   "devDependencies": {
@@ -10,10 +10,12 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
-    "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.23.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "css-loader": "^6.6.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.2.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
     "react": "^16.6.0",
