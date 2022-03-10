@@ -16,14 +16,23 @@ const Line = (props) => {
     },
   };
 
-  const { element, json, level } = props;
-  const { index, isOpen, children } = element;
+  const { levels, json, level, posOnLevel } = props;
+  const element = levels[level][posOnLevel];
+  const { index, title, children } = element;
   const title = json[index].title;
-  console.log(title);
+
+  function getChildren() {
+      const nextLevel = level + 1;
+      const indexOfFirstElement = levels[nextLevel].findIndex((item) => item.index===index)
+      const length = children.length;
+      return levels[nextLevel].slice()
+  }
+
   return (
     <div style={styles.div}>
       {title}
       <span style={styles.span}>{isOpen ? "-" : "+"}</span>
+      {isOpen && }
     </div>
   );
 };

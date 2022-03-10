@@ -47,11 +47,17 @@ const App = () => {
 
   console.log(sections);
   console.log(load(sections));
-  console.log(sections[levels[0][0].index]);
+  const ROOT_LEVEL = 0;
+  const POS_ON_ROOT_LEVEL = 0;
   return (
     <>
       <h1>Crazy company UI example</h1>
-      <Line element={levels[0][0]} json={sections} level="0" />
+      <Line
+        levels={levels}
+        json={sections}
+        level={ROOT_LEVEL}
+        posOnLevel={POS_ON_ROOT_LEVEL}
+      />
     </>
   );
 };
