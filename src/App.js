@@ -1,8 +1,11 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
+import Line from "./Line";
 import "./App.css";
 import sections from "../data/sections.json";
 
 const App = () => {
+  const [levels, setLevels] = useState(load(sections));
+
   function findChildren(json, parentId) {
     const children = [];
     json.forEach((element, index) => {
@@ -44,7 +47,13 @@ const App = () => {
 
   console.log(sections);
   console.log(load(sections));
-  return <h1>Hello, world. My version.</h1>;
+  console.log(sections[levels[0][0].index]);
+  return (
+    <>
+      <h1>Crazy company UI example</h1>
+      <Line element={levels[0][0]} json={sections} level="0" />
+    </>
+  );
 };
 
 export default App;
