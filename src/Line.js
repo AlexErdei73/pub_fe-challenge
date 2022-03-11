@@ -1,59 +1,70 @@
 import React from "react";
 
 const Line = (props) => {
+  const { levels, json, level, posOnLevel } = props;
   const styles = {
-    div: {
-      width: "500px",
-      maxWidth: "60%",
-      fontSize: "1.2em",
-      borderBottom: "2px solid dodgerblue",
+    container: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
       marginLeft: `${level}em`,
+      marginBottom: ".2em",
+      borderBottom: "1px solid dodgerblue",
     },
-    span: {
+    text: {
+      fontSize: "1.2em",
+    },
+    btn: {
       color: "dodgerblue",
-      borderBottom: "2px solid dodgerblue",
-      float: "right",
+      fontSize: "2em",
     },
   };
 
-  const { levels, json, level, posOnLevel } = props;
   const element = levels[level][posOnLevel];
-  const { index, children, isOpen} = element;
-  const title = json[index];
+  const { index, children, isOpen } = element;
+  const title = json[index].title;
   const nextLevel = level + 1;
 
   function getChildren() {
-      const indexOfFirstElement = levels[nextLevel].findIndex((item) => item.index===children[0])
-      const length = children.length;
-      const indexOfElementAfterLast = indexOfFirstElement + length;
-      const ch = levels[nextLevel].slice(indexOfFirstElement, indexOfElementAfterLast);
-      console.log(children[0]);
-      console.log(level, index);
-      console.log(indexOfFirstElement);
-      console.log(ch);
-      return ch;
+    if (!levels[nextLevel]) return [];
+    const indexOfFirstElement = levels[nextLevel].findIndex(
+      (item) => item.index === children[0]
+    );
+    const length = children.length;
+    const indexOfElementAfterLast = indexOfFirstElement + length;
+    return levels[nextLevel].slice(
+      indexOfFirstElement,
+      indexOfElementAfterLast
+    );
   }
 
   function getChildIndex(item) {
-      return levels[nextLevel].findIndex((elem) => elem.index === item.index)
+    if (!levels[nextLevel]) return -1;
+    else
+      return levels[nextLevel].findIndex((elem) => elem.index === item.index);
   }
+
+  const childElements = getChildren(nextLevel).map((elem) => {
+    if (getChildIndex(elem) > -1)
+      return (
+        <Line
+          levels={levels}
+          json={json}
+          level={nextLevel}
+          posOnLevel={getChildIndex(elem)}
+        />
+      );
+    else return <></>;
+  });
 
   return (
     <>
-    <div style={styles.div}>
-      {title}
-      <span style={styles.span}>{isOpen ? "-" : "+"}</span>
-    </div>
-    {getChildren().map((elem) => 
-      <Line 
-        levels={levels} 
-        json={json} 
-        level={nextLevel} 
-        posOnLevel={getChildIndex(elem)}
-      />)
-    }
+      <div style={styles.container}>
+        <div style={styles.text}>{title}</div>
+        <div style={styles.btn}>{isOpen ? "-" : "+"}</div>
+      </div>
+      {isOpen && childElements}
     </>
-    
   );
 };
 
