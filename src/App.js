@@ -57,6 +57,7 @@ const App = () => {
         json={sections}
         level={ROOT_LEVEL}
         posOnLevel={POS_ON_ROOT_LEVEL}
+        setLevels={setLevels}
       />
     </>
   );

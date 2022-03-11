@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Line = (props) => {
-  const { levels, json, level, posOnLevel } = props;
+  const { levels, json, level, posOnLevel, setLevels } = props;
 
   const styles = {
     container: {
@@ -11,6 +11,7 @@ const Line = (props) => {
       marginLeft: `${level}em`,
       marginBottom: ".2em",
       borderBottom: "1px solid dodgerblue",
+      maxWidth: "600px",
     },
     text: {
       fontSize: "1.2em",
@@ -25,8 +26,6 @@ const Line = (props) => {
   const { index, children, isOpen } = element;
   const title = json[index].title;
   const nextLevel = level + 1;
-
-  const [open, setOpen] = useState(isOpen);
 
   function getChildren() {
     if (!levels[nextLevel]) return [];
@@ -55,22 +54,30 @@ const Line = (props) => {
           json={json}
           level={nextLevel}
           posOnLevel={getChildIndex(elem)}
+          setLevels={setLevels}
         />
       );
     else return <></>;
   });
 
+  function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
   function handleClick() {
-    setOpen(!open);
+    const newLevels = deepCopy(levels);
+    const elem = newLevels[level][posOnLevel];
+    elem.isOpen = !isOpen;
+    setLevels(newLevels);
   }
 
   return (
     <>
       <div style={styles.container} onClick={handleClick}>
         <div style={styles.text}>{title}</div>
-        <div style={styles.btn}>{open ? "-" : "+"}</div>
+        <div style={styles.btn}>{isOpen ? "–" : "+"}</div>
       </div>
-      {open && childElements}
+      {isOpen && childElements}
     </>
   );
 };
