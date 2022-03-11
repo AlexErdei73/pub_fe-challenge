@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Line = (props) => {
   const { levels, json, level, posOnLevel } = props;
+
   const styles = {
     container: {
       display: "flex",
@@ -24,6 +25,8 @@ const Line = (props) => {
   const { index, children, isOpen } = element;
   const title = json[index].title;
   const nextLevel = level + 1;
+
+  const [open, setOpen] = useState(isOpen);
 
   function getChildren() {
     if (!levels[nextLevel]) return [];
@@ -57,13 +60,17 @@ const Line = (props) => {
     else return <></>;
   });
 
+  function handleClick() {
+    setOpen(!open);
+  }
+
   return (
     <>
-      <div style={styles.container}>
+      <div style={styles.container} onClick={handleClick}>
         <div style={styles.text}>{title}</div>
-        <div style={styles.btn}>{isOpen ? "-" : "+"}</div>
+        <div style={styles.btn}>{open ? "-" : "+"}</div>
       </div>
-      {isOpen && childElements}
+      {open && childElements}
     </>
   );
 };
