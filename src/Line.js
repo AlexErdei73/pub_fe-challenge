@@ -23,10 +23,15 @@ const Line = (props) => {
   const nextLevel = level + 1;
 
   function getChildren() {
-      const indexOfFirstElement = levels[nextLevel].findIndex((item) => item.index===index)
+      const indexOfFirstElement = levels[nextLevel].findIndex((item) => item.index===children[0])
       const length = children.length;
       const indexOfElementAfterLast = indexOfFirstElement + length;
-      return levels[nextLevel].slice(indexOfFirstElement, indexOfElementAfterLast);
+      const ch = levels[nextLevel].slice(indexOfFirstElement, indexOfElementAfterLast);
+      console.log(children[0]);
+      console.log(level, index);
+      console.log(indexOfFirstElement);
+      console.log(ch);
+      return ch;
   }
 
   function getChildIndex(item) {
@@ -39,7 +44,14 @@ const Line = (props) => {
       {title}
       <span style={styles.span}>{isOpen ? "-" : "+"}</span>
     </div>
-    {isOpen && getChildren().map((elem) => <Line levels={levels} json={json} level={nextLevel} posOnLevel={getChildIndex(elem)}/>)}
+    {getChildren().map((elem) => 
+      <Line 
+        levels={levels} 
+        json={json} 
+        level={nextLevel} 
+        posOnLevel={getChildIndex(elem)}
+      />)
+    }
     </>
     
   );
