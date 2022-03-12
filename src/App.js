@@ -21,9 +21,9 @@ const App = () => {
     });
     return children;
   }
-  
-  //This function loads in the sections.json file. The data is structured in 
-  //that array with key element pairs on a way, which is a binary tree. 
+
+  //This function loads in the sections.json file. The data is structured in
+  //that array with key element pairs on a way, which is a binary tree.
   //The search operation requires a difficult algorithm in that data
   //structure. We avoid that with maping the data structure to a two-dimensional
   //array. The first index means the level on the tree, the second index means
@@ -61,23 +61,15 @@ const App = () => {
     return levels;
   }
 
-  function getQuestion(question) {
-    return question.question;
-  }
-
-  function getAnswer(question) {
-    return question.answer;
-  }
-
   function loadQuestions(questions, output) {
     questions.forEach((question) => {
       output.push({
-        question: getQuestion(question),
-        answer: getAnswer(question),
-        showAnswer: false,
+        question: question.question,
+        answer: question.answer,
+        showAnswer: true,
         sectionId: question.sectionId,
       });
-    })
+    });
   }
 
   const ROOT_LEVEL = 0;
