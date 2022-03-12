@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import Line from "./Line";
 import "./App.css";
 import sections from "../data/sections.json";
+import questions1 from "../data/4,5,6,7,8,11,12,15,16,17.json";
+import questions2 from "../data/44,45,46.json";
 
 const App = () => {
   const [levels, setLevels] = useState(load(sections));
+
+  const QUESTIONS_INIT = [];
+  loadQuestions(questions1, QUESTIONS_INIT);
+  loadQuestions(questions2, QUESTIONS_INIT);
+
+  const [questions, setQuestions] = useState(QUESTIONS_INIT);
 
   function findChildren(json, parentId) {
     const children = [];
@@ -13,7 +21,15 @@ const App = () => {
     });
     return children;
   }
-
+  
+  //This function loads in the sections.json file. The data is structured in 
+  //that array with key element pairs on a way, which is a binary tree. 
+  //The search operation requires a difficult algorithm in that data
+  //structure. We avoid that with maping the data structure to a two-dimensional
+  //array. The first index means the level on the tree, the second index means
+  //the branch position on the given level of the tree. This way every search
+  //operation becomes elementary search in a 2D-array. This perhaps a relatively
+  //simple solution for this not so simple problem.
   function load(json) {
     const ROOT = -1;
     const levels = [];
@@ -45,8 +61,25 @@ const App = () => {
     return levels;
   }
 
-  console.log(sections);
-  console.log(load(sections));
+  function getQuestion(question) {
+    return question.question;
+  }
+
+  function getAnswer(question) {
+    return question.answer;
+  }
+
+  function loadQuestions(questions, output) {
+    questions.forEach((question) => {
+      output.push({
+        question: getQuestion(question),
+        answer: getAnswer(question),
+        showAnswer: false,
+        sectionId: question.sectionId,
+      });
+    })
+  }
+
   const ROOT_LEVEL = 0;
   const POS_ON_ROOT_LEVEL = 0;
   return (
@@ -58,6 +91,8 @@ const App = () => {
         level={ROOT_LEVEL}
         posOnLevel={POS_ON_ROOT_LEVEL}
         setLevels={setLevels}
+        questions={questions}
+        setQuestions={setQuestions}
       />
     </>
   );
