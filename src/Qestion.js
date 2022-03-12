@@ -1,7 +1,7 @@
 import React from "react";
 
 const Question = (props) => {
-  const { question, level } = props;
+  const { question, level, questions, setQuestions } = props;
 
   const styles = {
     container: {
@@ -22,9 +22,19 @@ const Question = (props) => {
     },
   };
 
+  function handleClick() {
+    const newQuestions = [...questions];
+    const ind = questions.findIndex(
+      (quest) => quest.question === question.question
+    );
+    const showAnswer = newQuestions[ind].showAnswer;
+    newQuestions[ind].showAnswer = !showAnswer;
+    setQuestions(newQuestions);
+  }
+
   return (
     <>
-      <div style={styles.container}>
+      <div style={styles.container} onClick={handleClick}>
         <div
           style={styles.text}
           dangerouslySetInnerHTML={{ __html: question.question }}

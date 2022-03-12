@@ -23,9 +23,9 @@ const App = () => {
   }
 
   //This function loads in the sections.json file. The data is structured in
-  //that array with key element pairs on a way, which is a binary tree.
+  //that array with key element pairs on a way, which is called a binary tree.
   //The search operation requires a difficult algorithm in that data
-  //structure. We avoid that with maping the data structure to a two-dimensional
+  //structure. We avoid that with mapping the data structure to a two-dimensional
   //array. The first index means the level on the tree, the second index means
   //the branch position on the given level of the tree. This way every search
   //operation becomes elementary search in a 2D-array. This perhaps a relatively
@@ -66,7 +66,7 @@ const App = () => {
       output.push({
         question: question.question,
         answer: question.answer,
-        showAnswer: true,
+        showAnswer: false,
         sectionId: question.sectionId,
       });
     });
