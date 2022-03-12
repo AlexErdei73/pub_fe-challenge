@@ -1,7 +1,8 @@
 import React from "react";
+import Question from "./Qestion";
 
 const Line = (props) => {
-  const { levels, json, level, posOnLevel, setLevels } = props;
+  const { levels, json, level, posOnLevel, setLevels, questions, setQuestions } = props;
 
   const styles = {
     container: {
@@ -55,10 +56,14 @@ const Line = (props) => {
           level={nextLevel}
           posOnLevel={getChildIndex(elem)}
           setLevels={setLevels}
+          questions={questions}
         />
       );
     else return <></>;
   });
+
+  const questionsForThisSection = questions.filter((question) => 
+    question.sectionId === json[index].id);
 
   function deepCopy(obj) {
     return JSON.parse(JSON.stringify(obj));
@@ -78,6 +83,7 @@ const Line = (props) => {
         <div style={styles.btn}>{isOpen ? "–" : "+"}</div>
       </div>
       {isOpen && childElements}
+      {isOpen && questionsForThisSection.map((question, index) => <Question question={question} level={nextLevel}/>)}
     </>
   );
 };
