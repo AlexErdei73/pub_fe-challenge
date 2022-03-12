@@ -52,6 +52,7 @@ export function loadQuestions(questions, output) {
       answer: question.answer,
       showAnswer: false,
       sectionId: question.sectionId,
+      id: question.qa_id,
     });
   });
 }

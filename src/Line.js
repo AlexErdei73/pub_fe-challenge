@@ -59,6 +59,7 @@ const Line = (props) => {
     if (getChildIndex(elem) > -1)
       return (
         <Line
+          key={`${nextLevel},${getChildIndex(elem)}`}
           levels={levels}
           json={json}
           level={nextLevel}
@@ -96,6 +97,7 @@ const Line = (props) => {
       {isOpen &&
         questionsForThisSection.map((question) => (
           <Question
+            key={question.id}
             question={question}
             level={nextLevel}
             questions={questions}
