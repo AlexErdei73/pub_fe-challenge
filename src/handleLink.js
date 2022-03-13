@@ -51,9 +51,7 @@ function nodePosition(index, levels) {
   let posOnLevel;
   levels.forEach((level, levelIndex) => {
     posOnLevel = level.findIndex((node) => node.index === index);
-    console.log("posOnLevel: ", posOnLevel);
     if (posOnLevel > -1) {
-      console.log("node: ", levels[levelIndex][posOnLevel]);
       pos.posOnLevel = posOnLevel;
       pos.level = levelIndex;
     }
@@ -73,7 +71,6 @@ function findPathInTree(tocId, questions, levels, sections) {
   const nodePos = nodePositionOfQuestion(tocId, questions, levels, sections);
   if (!nodePos) return;
   path.push(nodePos);
-  console.log("path at the begiining: ", path);
   let index, lastNode;
   for (let levelIndex = path[0].level; levelIndex > 0; levelIndex--) {
     lastNode = path[path.length - 1];
@@ -85,12 +82,9 @@ function findPathInTree(tocId, questions, levels, sections) {
 
 export function openPath(tocId, questions, levels, sections) {
   const questIndex = questionIndex(tocId, questions);
-  console.log(questIndex);
-  console.log(questions[questIndex]);
   if (questIndex === -1) return;
   questions[questIndex].showAnswer = true;
   const path = findPathInTree(tocId, questions, levels, sections);
-  console.log("path: ", path);
   if (!path) return;
   path.forEach((node) => {
     levels[node.level][node.posOnLevel].isOpen = true;
