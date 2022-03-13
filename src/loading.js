@@ -53,6 +53,7 @@ export function loadQuestions(questions, output) {
       showAnswer: false,
       sectionId: question.sectionId,
       id: question.qa_id,
+      tocId: question.tocId,
     });
   });
 }
