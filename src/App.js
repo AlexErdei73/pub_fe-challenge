@@ -43,8 +43,8 @@ const App = () => {
   const ROOT_LEVEL = 0;
   const POS_ON_ROOT_LEVEL = 0;
   return (
-    <>
-      <h1>Crazy company UI example</h1>
+    <main>
+      <h1>Legal Requirements Regarding Companies</h1>
       <Line
         levels={levels}
         json={sections}
@@ -54,7 +54,7 @@ const App = () => {
         questions={questions}
         setQuestions={setQuestions}
       />
-    </>
+    </main>
   );
 };
 
