@@ -1,6 +1,10 @@
 import React from "react";
 import Question from "./Qestion";
 
+export function deepCopy(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
 const Line = (props) => {
   const {
     levels,
@@ -75,10 +79,6 @@ const Line = (props) => {
   const questionsForThisSection = questions.filter(
     (question) => question.sectionId === json[index].id
   );
-
-  function deepCopy(obj) {
-    return JSON.parse(JSON.stringify(obj));
-  }
 
   function handleClick() {
     const newLevels = deepCopy(levels);

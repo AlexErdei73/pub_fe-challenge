@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Line from "./Line";
+import Line, { deepCopy } from "./Line";
 import { load, loadQuestions } from "./loading";
+import {
+  closeEveryUIItem,
+  questionIndex,
+  openPath,
+  nodePositionOfQuestion,
+} from "./handleLink";
 import { useLocation } from "react-router-dom";
 import "./App.css";
 import sections from "../data/sections.json";
@@ -16,9 +22,22 @@ const App = () => {
 
   const [questions, setQuestions] = useState(QUESTIONS_INIT);
 
+  function showNewQuestion(tocId) {
+    const newQuestions = deepCopy(questions);
+    const newLevels = deepCopy(levels);
+    const questIndex = questionIndex(tocId, questions);
+    const nodePos = nodePositionOfQuestion(tocId, questions, levels, sections);
+    if (questIndex === -1 || !nodePos) return;
+    closeEveryUIItem(newLevels, newQuestions);
+    openPath(tocId, newQuestions, newLevels, sections);
+    setQuestions(newQuestions);
+    setLevels(newLevels);
+  }
+
   const location = useLocation();
   useEffect(() => {
-    console.log(location.hash);
+    const tocId = location.hash.slice(1);
+    showNewQuestion(tocId);
   }, [location]);
 
   const ROOT_LEVEL = 0;
